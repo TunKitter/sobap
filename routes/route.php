@@ -1,4 +1,4 @@
 <?php
-Route::get("/demo", HackingController::_('index'));
-Route::get("/something", DemoController::_("index"));
-Route::get("/tunkit", HackingController::_('vainoi'));
+Route::get("/hacking", HackingController::_('index'));
+Route::get("/demo", DemoController::_("index"));
+Route::get("/tunkit", VaiNoiController::_('index2'));
