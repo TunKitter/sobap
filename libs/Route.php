@@ -17,6 +17,11 @@ class Route
     }
     private static function addEndpoint(string $type, string $url, callable $callback)
     {
+        // preg_match_all("|\{.+\}|U", $url, $vars, PREG_PATTERN_ORDER);
+        // foreach ($vars[0] as $key => $val) {
+        //     $_SERVER['ss'][] = $val;
+        // }
+        // var_dump($url);
         self::$route[$type][$url] = $callback;
     }
     public static function get(string $url, callable $callback): void
