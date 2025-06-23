@@ -1,4 +1,3 @@
 <?php
-Route::get("/hacking", HackingController::_('index'));
-Route::get("/demo", DemoController::_("index"));
-Route::get("/tunkit", VaiNoiController::_('index2'));
+Route::get("/", HomeController::_('index'));
+Route::post("/", HomeController::_('handle_index'));

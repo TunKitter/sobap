@@ -9,7 +9,7 @@ class Route
     }
     public static function dispatch()
     {
-        $t = self::checkExist($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+        $t = self::checkExist(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), $_SERVER['REQUEST_METHOD']);
         if ($t['status'])
             $t['data']();
         else
