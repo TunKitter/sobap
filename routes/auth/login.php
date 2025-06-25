@@ -1,3 +1,3 @@
 <?php
-echo "This is login";
-?>
+A(['GET', 'POST'], 'login');
+require "views/login/login.php";
