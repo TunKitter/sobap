@@ -5,8 +5,14 @@ function A($method, $name)
     if (in_array($A0, $method)) require "handler/$name/$A0.php";
     else exit();
 }
-$A0 = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), "/");
-if (strlen($A0) == 0) require "routes/index.php";
+$A = $_SERVER['REQUEST_URI'];
+if(!preg_match("/^[0-9a-zA-Z\/]+$/",$A)) {
+    require "routes/notfound.php";
+    exit();
+}
+$A0 = trim(parse_url($A, PHP_URL_PATH), "/");
+if ($A0 == "") require "routes/index.php";
+elseif(is_dir("routes/$A0")) require "routes/notfound.php";
 elseif (is_file("routes/$A0.php")) require "routes/$A0.php";
 else {
     $A1 = explode("/", $A0);
