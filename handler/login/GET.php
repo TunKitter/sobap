@@ -1,3 +1,7 @@
-<?php
-echo "YOU ARE GET";
+<?php {
+    function find()
+    {
+        return "Tunkit";
+    }
+}
 ?>
