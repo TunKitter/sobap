@@ -2,10 +2,7 @@
 if ($argc > 1) {
     switch ($argv[1]) {
         case 'test':
-            passthru('php phpunit tests --color --display-incomplete --testdox');
-            break;
-        default:
-            # code...
+            echo shell_exec("sh scripts/test.sh");
             break;
     }
 }

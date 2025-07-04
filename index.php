@@ -6,7 +6,7 @@ function A($method, $name)
     else exit();
 }
 $A = $_SERVER['REQUEST_URI'];
-if(!preg_match("/^[0-9a-zA-Z\/]+$/",$A)) {
+if(!preg_match("/^[0-9a-zA-Z\/-]+$/",$A)) {
     require "routes/notfound.php";
     exit();
 }
