@@ -14,7 +14,12 @@ class Route
     }
     public static function dispatch()
     {
-        $t = self::checkExist($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+        $method = $_SERVER['REQUEST_METHOD'];
+        if (!isset(self::$route[$method])) {
+            $t = ['status' => false, 'data' => null, 'matches' => []];
+        } else {
+            $t = self::checkExist($_SERVER['REQUEST_URI'], $method);
+        }
         if ($t['status'])
             $t['data']($t['matches']);
         else
@@ -23,7 +28,8 @@ class Route
     private static function addEndpoint(string $type, string $url, callable $callback)
     {
         $url = trim($url, '/');
-        $pattern = preg_replace("/\{[\w\-]+\}/", "([^\/]+)", $url);
+        $escapedUrl = preg_quote($url, '#');
+        $pattern = preg_replace("/\\\\\{[\w\-]+\\\\\}/", "([^\/]+)", $escapedUrl);
         self::$route[$type][$pattern] = $callback;
     }
     public static function get(string $url, callable $callback): void
