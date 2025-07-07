@@ -62,5 +62,8 @@ class Route
 }
 Route::get("something");
 Route::get("/");
-Route::get("something/{demo}");
+Route::get("something/{demo}",function($data) {
+    echo "HIII";
+    // var_dump($data);
+});
 Route::post("something/{vai}");
