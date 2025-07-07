@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . "\\..\\Logger.php";
-require_once __DIR__ . "\\abstraction\\RouteHandler.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Logger.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . "abstraction" . DIRECTORY_SEPARATOR . "RouteHandler.php";
 class Route
 {
     private static $instance;
@@ -39,7 +39,8 @@ class Route
         $data = array_find(static::$instance->route, function ($k, $v) use (&$matches, $url) {
             return preg_match("#^$v$#", $url, $matches) && $k[1]();
         });
-        array_shift($matches);
+        if ($matches)
+            array_shift($matches);
         if (!$data)
             exit("Not found bro");
         $data[2](array_combine($data[0], $matches));
@@ -49,7 +50,7 @@ class Route
     {
     }
     # prevent cloning
-    public function __clone()
+    private function __clone()
     {
     }
     # prevent unserialization
