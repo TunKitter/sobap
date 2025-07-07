@@ -1,0 +1,48 @@
+    <style>
+        .message-container {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: flex-end;
+            max-width: 300px;
+        }
+
+        .message {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+    <div class="message-container" id="messageContainer"></div>
+    <script>
+        function createMessage(content) {
+            const messageContainer = document.getElementById('messageContainer');
+            const message = document.createElement('div');
+            message.className = 'message';
+            message.textContent = content;
+
+            messageContainer.appendChild(message);
+
+            window.getComputedStyle(message).opacity;
+            message.classList.add('show');
+            setTimeout(() => {
+                message.classList.remove('show');
+                setTimeout(() => messageContainer.removeChild(message), 300);
+            }, 3000);
+        }
+
+        createMessage('This is a new message');
+    </script>
