@@ -17,7 +17,8 @@ class Route
         $escapedUrl = preg_quote($url, '#');
         preg_match_all("/{\w+}/", $url, $demo);
         $pattern = preg_replace("/\\\\\{[\w\-]+\\\\\}/", "([^\/]+)", $escapedUrl);
-        static::$instance->route[$pattern] = [
+        static::$instance->route[] = [
+            $pattern,
             array_map(function ($str) {
                 return substr($str, 1, strlen($str) - 2);
             }, $demo[0]),
@@ -36,14 +37,14 @@ class Route
     public function __destruct()
     {
         $url = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-        $data = array_find(static::$instance->route, function ($k, $v) use (&$matches, $url) {
-            return preg_match("#^$v$#", $url, $matches) && $k[1]();
+        $data = array_find(static::$instance->route, function ($value) use (&$matches, $url) {
+            return preg_match("#^".$value[0]."$#", $url, $matches) && $value[2]();
         });
         if ($matches)
             array_shift($matches);
         if (!$data)
             exit("Not found bro");
-        $data[2](array_combine($data[0], $matches));
+        $data[3](array_combine($data[1], $matches));
     }
     # prevent initialization
     private function __construct()
@@ -60,5 +61,6 @@ class Route
     }
 }
 Route::get("something");
+Route::get("/");
 Route::get("something/{demo}");
 Route::post("something/{vai}");
