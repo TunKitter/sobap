@@ -38,7 +38,7 @@ class Route
     {
         $url = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
         $data = array_find(static::$instance->route, function ($value) use (&$matches, $url) {
-            return preg_match("#^".$value[0]."$#", $url, $matches) && $value[2]();
+            return preg_match("#^" . $value[0] . "$#", $url, $matches) && $value[2]();
         });
         if ($matches)
             array_shift($matches);
@@ -60,10 +60,3 @@ class Route
         throw new Exception("Cannot unserialize singleton");
     }
 }
-Route::get("something");
-Route::get("/");
-Route::get("something/{demo}",function($data) {
-    echo "HIII";
-    // var_dump($data);
-});
-Route::post("something/{vai}");
