@@ -1,4 +1,5 @@
 <?php
+require "common/http_method.php";
 class get implements RouteHandler
 {
     public static function handle($args)
@@ -6,7 +7,7 @@ class get implements RouteHandler
         Route::getInstance()->addEndpoint($args[0], function () {
             return $_SERVER['REQUEST_METHOD'] == 'GET';
         }, function ($data) use ($args) {
-            for($i = 1; $i < count($args); $i++) $args[$i]($data);
+            handle_http_method($args, $data);
         });
     }
 }

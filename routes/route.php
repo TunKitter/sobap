@@ -1,13 +1,8 @@
 <?php
-Route::get("something/{demo}", function ($data) {
-    var_dump($data);
-}, function () {
-    echo "ahihi";
-});
+Route::get('something/{demo}','Demo::wow');
 
-Route::post("/", function ($data) {
-    echo getenv('MODE');
-}, function () {
-    echo "ahihi nee";
+Route::get("anh/la/ai",function() {
+    echo "Just call me";
 });
+Route::post("/", 'Demo::wow');
 
