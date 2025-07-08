@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\TestDox;
-require "lib/route/Route.php";
+require_once "lib/route/Route.php";
 interface Demo
 {
     public function ahihi(): string;
