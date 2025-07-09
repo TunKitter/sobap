@@ -6,7 +6,7 @@ class post implements RouteHandler
 
         Route::getInstance()->addEndpoint($args[0], function () {
             return $_SERVER['REQUEST_METHOD'] == 'POST';
-        }, function ($data) use ($args) {
+        }, function (Request $data) use ($args) {
             handle_http_method($args, $data);
         });
     }

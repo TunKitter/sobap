@@ -6,7 +6,7 @@ class get implements RouteHandler
     {
         Route::getInstance()->addEndpoint($args[0], function () {
             return $_SERVER['REQUEST_METHOD'] == 'GET';
-        }, function ($data) use ($args) {
+        }, function (Request $data) use ($args) {
             handle_http_method($args, $data);
         });
     }

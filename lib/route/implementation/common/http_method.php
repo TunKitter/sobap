@@ -1,5 +1,5 @@
 <?php
-function handle_http_method($args, $data)
+function handle_http_method($args, Request $data)
 {
     for ($i = 1; $i < count($args); $i++) {
         switch (gettype($args[$i])) {

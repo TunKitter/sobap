@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Logger.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Request.php";
 require_once __DIR__ . DIRECTORY_SEPARATOR . "abstraction" . DIRECTORY_SEPARATOR . "RouteHandler.php";
 class Route
 {
@@ -41,7 +41,9 @@ class Route
         });
         if ($matches) array_shift($matches);
         if (!$data) exit("Not found bro");
-        $data[3](array_combine($data[1], $matches));
+        $request = new Request();
+        $request->setParam(array_combine($data[1], $matches));
+        $data[3]($request);
     }
     # prevent initialization
     private function __construct() {}

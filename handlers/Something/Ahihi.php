@@ -1,8 +1,8 @@
 <?php
 class Ahihi
 {
-    public static function something()
+    public static function something(Request $request)
     {
-        echo "this is ahihi";
+        var_dump($request->param('demo'));
     }
 }
