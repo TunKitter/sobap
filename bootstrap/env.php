@@ -9,3 +9,4 @@ while ($data = fgets($file)) {
     }
 }
 fclose($file);
+putenv("ROOT_DIR=" . (substr(__DIR__, 0, strrpos(__DIR__, DIRECTORY_SEPARATOR, -1))));

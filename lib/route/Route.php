@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Logger.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Request.php";
 require_once __DIR__ . DIRECTORY_SEPARATOR . "abstraction" . DIRECTORY_SEPARATOR . "RouteHandler.php";
 class Route
 {
@@ -7,8 +7,7 @@ class Route
     public $route = [];
     public static function getInstance()
     {
-        if (!isset(static::$instance))
-            static::$instance = new Route();
+        if (!isset(static::$instance)) static::$instance = new Route();
         return static::$instance;
     }
     public function addEndpoint($url, callable $condition, callable $callback)
@@ -40,20 +39,16 @@ class Route
         $data = array_find(static::$instance->route, function ($value) use (&$matches, $url) {
             return preg_match("#^" . $value[0] . "$#", $url, $matches) && $value[2]();
         });
-        if ($matches)
-            array_shift($matches);
-        if (!$data)
-            exit("Not found bro");
-        $data[3](array_combine($data[1], $matches));
+        if ($matches) array_shift($matches);
+        if (!$data) exit("Not found bro");
+        $request = new Request();
+        $request->setParam(array_combine($data[1], $matches));
+        $data[3]($request);
     }
     # prevent initialization
-    private function __construct()
-    {
-    }
+    private function __construct() {}
     # prevent cloning
-    private function __clone()
-    {
-    }
+    private function __clone() {}
     # prevent unserialization
     public function __wakeup()
     {
