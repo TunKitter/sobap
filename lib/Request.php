@@ -7,7 +7,7 @@ class Request
         $this->params = (object) $params;
     }
     public function param($name) {
-        return $this->params->{$name} ?? null;
+        return $this->params ? ($this->params->{$name} ?? null) : null;
     }
     public function get($name,$default = null)
     {

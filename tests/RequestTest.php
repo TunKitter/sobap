@@ -18,20 +18,16 @@ class RequestTest extends TestCase
     #[DataProvider('fakeData')]
     public function testSameValueGetRequest($key, $value)
     {
-        $_GET = array_combine([$key], [$value]);
+        $_GET = [$key => $value];
         $request = new Request();
-        foreach ($_GET as $key => $value) {
-            $this->assertSame($request->get($key), $value);
-        }
+        $this->assertSame($request->get($key), $value);
     }
     #[DataProvider('fakeData')]
     public function testSameValuePostRequest($key, $value)
     {
-        $_POST = array_combine([$key], [$value]);
+        $_POST = [$key => $value];
         $request = new Request();
-        foreach ($_POST as $key => $value) {
-            $this->assertSame($request->post($key), $value);
-        }
+        $this->assertSame($request->post($key), $value);
     }
     #[TestDox("Test the default value Request object")]
     public function testDefaultValueGetRequest()
