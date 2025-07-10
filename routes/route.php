@@ -1,8 +1,7 @@
 <?php
-Route::get('something/{demo}','Something/Ahihi::something');
-
-Route::get("anh/la/ai",function(Request $request) {
-    var_dump($request->get('demo'));
-});
-Route::post("/", 'Demo::wow');
-
+Route::get('/', 'Home::index');
+Route::get('/login', 'Auth::login');
+Route::post('/login', 'Auth::handleLogin');
+Route::get('/register', 'Auth::register');
+Route::get('/blogs', 'Blog::index');
+Route::get('/blogs/{id}', 'Blog::detail');

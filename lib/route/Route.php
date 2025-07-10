@@ -28,9 +28,7 @@ class Route
     public static function __callStatic($method, $args)
     {
         $file = __DIR__ . "\\implementation\\$method.php";
-        if (!file_exists($file))
-            exit("<span style='color:red'>The <b>$method</b> method doesn't exist</span>");
-        require_once $file;
+        if (!file_exists($file)) exit("<span style='color:red'>The <b>$method</b> method doesn't exist</span>");
         return $method::handle($args);
     }
     public function __destruct()
