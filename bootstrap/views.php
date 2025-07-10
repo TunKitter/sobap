@@ -10,6 +10,8 @@ class View
     }
     private static function getSingleHandler($handler, $document) {
         require getenv('ROOT_DIR') . "/views/" . $handler . ".php";
+        $data = explode('/', $handler);
+        $handler = end($data);
         return new $handler($document);
     }
 
@@ -23,7 +25,12 @@ class View
         if ($handler == null) return new DOMDecorator($document);
         elseif (gettype($handler) == 'string') return static::getSingleHandler($handler, $document);
         $hs = new stdClass;
-        foreach ($handler as $h) $hs->{$h} = static::getSingleHandler($h, $document);
+        foreach ($handler as $h) 
+         {
+            $data = explode('/', $h);
+            $data = end($data);
+            $hs->{$data} = static::getSingleHandler($h, $document);
+         }
         $hs->base = new DOMDecorator($document);
         return $hs;
     }

@@ -3,18 +3,13 @@ class Auth
 {
     public static function login(Request $request)
     {
-        echo <<<EOF
-        <form method="POST">
-        <input type="text" name="username">
-        <input type="password" name="password">
-        <button>Login</button>
-        </form>
-        EOF;
+        View::getView('views/auth/login', ['methods/layout','methods/auth/login'])->layout->render();
     }
     public static function handleLogin(Request $request)
     {
-        var_dump($request->post('username'));
-        var_dump($request->post('password'));
+        $view = View::getView('views/auth/login', ['methods/layout','methods/auth/login']);
+        $view->login->setName("Username doesn't work");
+        $view->layout->render();
     }
 
     public static function register(Request $request)

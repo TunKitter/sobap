@@ -5,3 +5,4 @@ Route::post('/login', 'Auth::handleLogin');
 Route::get('/register', 'Auth::register');
 Route::get('/blogs', 'Blog::index');
 Route::get('/blogs/{id}', 'Blog::detail');
+Route::get('/demo', 'Demo/Like/Something::vai');
