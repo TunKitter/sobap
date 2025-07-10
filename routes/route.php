@@ -1,5 +1,5 @@
 <?php
-Route::get('/', 'Home::index');
+Route::get('/', 'HomeController::index');
 Route::get('/login', 'Auth::login');
 Route::post('/login', 'Auth::handleLogin');
 Route::get('/register', 'Auth::register');

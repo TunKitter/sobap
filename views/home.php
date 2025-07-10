@@ -1,10 +1,12 @@
 <?php
 
-class header2 extends DOMDecorator
+class home extends DOMDecorator
 {
-    public function setupMe()
+    public function render()
     {
-        $this->setName('DEmooooooo');
+        View::getView('header')->render();
+        parent::render();
+        View::getView('footer')->render();
     }
     public function setName(string $name)
     {
