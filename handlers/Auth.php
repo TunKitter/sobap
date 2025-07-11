@@ -8,7 +8,7 @@ class Auth
     public static function handleLogin(Request $request)
     {
         $view = View::getView('views/auth/login', ['methods/layout','methods/auth/login']);
-        $view->login->setName("Username doesn't work");
+        $view->login->setName("Your user name is : " . $request->post('username'). " and your password is : " . $request->post('password'));
         $view->layout->render();
     }
 
