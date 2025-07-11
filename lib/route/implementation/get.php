@@ -1,5 +1,6 @@
 <?php
-require "common/http_method.php";
+require "lib/route/implementation/common/http_method.php";
+require "lib/route/abstraction/RouteHandler.php";
 class get implements RouteHandler
 {
     public static function handle($args)
