@@ -8,4 +8,5 @@ for($i = 2; $i < count($implementation); $i++) {
     if(is_file($path)) require $path;
 }
 require "lib/route/Route.php";
+require "lib/Response.php";
 require "routes/route.php";
