@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Request.php";
-require_once __DIR__ . DIRECTORY_SEPARATOR . "abstraction" . DIRECTORY_SEPARATOR . "RouteHandler.php";
+// require_once __DIR__ . DIRECTORY_SEPARATOR . "abstraction" . DIRECTORY_SEPARATOR . "RouteHandler.php";
 class Route
 {
     private static $instance;
