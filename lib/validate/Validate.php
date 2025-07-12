@@ -46,7 +46,7 @@ class Validate
     }
     public function numeric($message = 'The string must contain only numbers')
     {
-        $this->handleValidate(is_numeric($this->input), 'numeric', $message);
+        $this->handleValidate(preg_match('/^[0-9]+$/', $this->input), 'numeric', $message);
         return $this;
     }
 }
