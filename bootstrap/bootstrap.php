@@ -1,6 +1,7 @@
 <?php
 require "env.php";
 require "views.php";
+require "lib/validate/Validate.php";
 
 $implementation = scandir("lib/route/implementation");
 for($i = 2; $i < count($implementation); $i++) {

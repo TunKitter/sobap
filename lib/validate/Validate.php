@@ -1,19 +1,27 @@
 <?php
-var_dump(Validate::from('sdasasdsacom')->email('no bro')->numeric()->regex('/[0-5]/')->alphaNumericSpace()->validate());
 class Validate
 {
-    private $input;
+    protected $input;
     private $queue = [];
-    private function __construct($input)
+    protected function __construct($input)
     {
         $this->input = $input;
     }
+    public static function with($input)
+    {
+        $input = preg_replace('/[^a-zA-Z0-9_]/', '', $input);
+        if (empty($input)) throw new InvalidArgumentException('Invalid validator name');
+        $filePath = getenv('ROOT_DIR') . "/lib/validate/own/$input.php";
+        if (!file_exists($filePath)) throw new InvalidArgumentException("Validator class '$input' not found");
+        require_once $filePath;
+        return $input::from('');
+    }
     public static function from($input)
     {
-        return new self($input);
+        return new static($input);
     }
 
-    private function handleValidate($condition, $key, $message)
+    protected function handleValidate($condition, $key, $message)
     {
         if (!$condition) $this->queue[$key] = $message;
     }
@@ -31,25 +39,14 @@ class Validate
         $this->handleValidate(preg_match('/^[a-zA-Z0-9\s]+$/', $this->input), 'alphaNumericSpace', $message);
         return $this;
     }
-    public function regex($regex,$message = 'The string contains does not match regex')
+    public function regex($regex, $message = 'The string does not match regex pattern')
     {
         $this->handleValidate(preg_match($regex, $this->input), 'regex', $message);
         return $this;
     }
-    public function numeric($message = 'The string only contains numbers')
+    public function numeric($message = 'The string must contain only numbers')
     {
         $this->handleValidate(is_numeric($this->input), 'numeric', $message);
-        return $this;
-    }
-
-    public function alpha($message)
-    {
-        $this->handleValidate(preg_match('/^[a-zA-Z\s]+$/', $this->input), 'alpha', $message);
-        return $this;
-    }
-    public function noSpecialChar($message)
-    {
-        $this->handleValidate(!preg_match('/[^a-zA-Z0-9\s]/', $this->input), 'noSpecialChar', $message);
         return $this;
     }
 }
