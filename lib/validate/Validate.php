@@ -23,16 +23,16 @@ class Validate
         return new static($input);
     }
 
-    protected function handleValidate($condition, $key, $message)
+    final protected function handleValidate($condition, $key, $message)
     {
         if (!$condition)
             $this->queue[$key] = $message;
     }
-    public function validate()
+    final public function validate()
     {
         return ['is_error' => count($this->queue) > 0, 'data' => $this->queue];
     }
-    public function email($message = 'Email is not valid')
+    final public function email($message = 'Email is not valid')
     {
         $this->handleValidate(filter_var($this->input, FILTER_VALIDATE_EMAIL), 'email', $message);
         return $this;
