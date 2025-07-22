@@ -30,11 +30,12 @@ class Database
         }
         return static::$db;
     }
-    public static function getMany(string $table, $limit = null)
+    public static function getMany(string $table,string $where = '', $limit = null)
     {
-        if (Validate::from($table)->alphaNumeric()->validate()['is_error']) return handleExceptionWithDebug(1);
         $sql = "SELECT * FROM $table";
-        if ($limit != null)
+        if ($where !== '')
+            $sql .= " WHERE $where";
+        if ($limit !== null)
             $sql .= " LIMIT $limit";
         try {
             return Database::getInstance()->query($sql)->fetchAll();
@@ -42,6 +43,14 @@ class Database
             return handleExceptionWithDebug(1);
         }
     }
+    public static function getOne(string $table, string $where)
+    {
+        try {
+            return Database::getInstance()->query("SELECT * FROM $table WHERE $where LIMIT 1")->fetch();
+        } catch (\Throwable $th) {
+            return handleExceptionWithDebug(1);
+        }
+    }
 }
-$a = Database::getMany('orders', 4);
+$a = Database::getOne('orders', "OrderID = 10248");
 var_dump($a);
