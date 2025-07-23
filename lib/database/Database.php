@@ -66,4 +66,7 @@ class Database
     {
         return Database::getInstance()->exec("DELETE FROM $table WHERE $where");
     }
+    public static function query(string $sql) {
+        return Database::getInstance()->query($sql)->fetchAll();
+    } 
 }
