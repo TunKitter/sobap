@@ -21,8 +21,7 @@ class Database
             $pass = getenv('MYSQL_PASSWORD');
             $port = getenv('MYSQL_PORT');
             static::$db = new PDO("mysql:host=$host;port=$port;dbname=$db", $user, $pass, [PDO::ATTR_PERSISTENT => true]);
-            if (getenv('MODE') == 'DEV')
-                static::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            static::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             static::$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         }
         return static::$db;
@@ -62,5 +61,9 @@ class Database
         }, $data));
         $sql .= ")";
         return Database::getInstance()->exec($sql);
+    }
+    public static function delete(string $table, string $where)
+    {
+        return Database::getInstance()->exec("DELETE FROM $table WHERE $where");
     }
 }
