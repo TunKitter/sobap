@@ -42,7 +42,7 @@ class Database
     }
     public static function update(string $table, array $data, string $where)
     {
-        if(count($data) == 0) return null;
+        if (count($data) == 0) return null;
         $sql = "UPDATE $table SET ";
         foreach ($data as $key => $value) {
             $sql .= "$key = '$value', ";
@@ -51,7 +51,16 @@ class Database
         $sql .= " WHERE $where";
         return Database::getInstance()->exec($sql);
     }
+    public static function insert(string $table, array $data)
+    {
+        $keys = array_keys($data);
+        $sql = "INSERT INTO $table (";
+        $sql .= implode(', ', $keys);
+        $sql .= ") VALUES (";
+        $sql .= implode(', ', array_map(function ($value) {
+            return "'$value'";
+        }, $data));
+        $sql .= ")";
+        return Database::getInstance()->exec($sql);
+    }
 }
-// $a = Database::getOne('something', "name='tunkit'");
-$a = Database::update('something', ['name' => 'tunkit'], "id=1");
-var_dump($a);
