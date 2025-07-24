@@ -69,4 +69,10 @@ class Database
     public static function query(string $sql) {
         return Database::getInstance()->query($sql)->fetchAll();
     } 
+    public static function transaction(callable $callback)
+    {
+        Database::getInstance()->beginTransaction();
+        $callback(fn() => Database::getInstance()->commit(), fn() => Database::getInstance()->rollBack());
+    }
+
 }
