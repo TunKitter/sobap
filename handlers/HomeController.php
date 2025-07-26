@@ -4,6 +4,7 @@ class HomeController
     public static function index(Request $request)
     {
 
+        // var_dump(Database::insert('something')->columns('name', 'age')->withData(['asdds',17])->execute());
         // var_dump(Database::select('something')->where('id', '>=', '194')->orWhere('name', '=', 'demo')->getDistinct('name'));
         // var_dump(Database::select('something')->where([['id', '=', '193'], ['name', '=', 'demo']])->where([['age', '=', '12']])->get('name'));
         // var_dump(Database::raw('INSERT INTO something (name,age) VALUES ("test",18)')->execute());
