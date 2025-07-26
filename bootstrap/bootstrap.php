@@ -1,10 +1,12 @@
 <?php
-require "lib/utility/utility.php";
-set_error_handler("handleExceptionWithDebug");
+require "exception.php";
+set_error_handler("handleErrorWithDebug");
 set_exception_handler("handleExceptionWithDebug");
+require "lib/utility/utility.php";
 require "env.php";
 require "views.php";
 require "lib/validate/Validate.php";
+require "lib/Database/DatabaseHandler.php";
 require "lib/Database/Database.php";
 
 $implementation = scandir("lib/route/implementation");

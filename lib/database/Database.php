@@ -1,78 +1,26 @@
 <?php
 class Database
 {
-    private static $db;
-    private function __construct()
+    private static PDO $instance;
+    private function __construct() {}
+    private function __clone() {}
+    public static function getInstance()
     {
-    }
-    private function __clone()
-    {
-    }
-    public function __wakeup()
-    {
-        throw new Exception("Cannot unserialize singleton");
-    }
-    private static function getInstance()
-    {
-        if (!isset(static::$db)) {
+        if (!isset(self::$instance)) {
             $host = getenv('MYSQL_HOST');
             $user = getenv('MYSQL_USERNAME');
             $db = getenv('MYSQL_DATABASE');
             $pass = getenv('MYSQL_PASSWORD');
             $port = getenv('MYSQL_PORT');
-            static::$db = new PDO("mysql:host=$host;port=$port;dbname=$db", $user, $pass, [PDO::ATTR_PERSISTENT => true]);
-            static::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            static::$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            self::$instance = new PDO("mysql:host=$host;port=$port;dbname=$db", $user, $pass, [PDO::ATTR_PERSISTENT => true]);
+            self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            self::$instance->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         }
-        return static::$db;
+        return self::$instance;
     }
-    public static function getMany(string $table, string $where = '', $limit = null)
+    public static function __callStatic($method, $args)
     {
-        $sql = "SELECT * FROM $table";
-        if ($where !== '')
-            $sql .= " WHERE $where";
-        if ($limit !== null)
-            $sql .= " LIMIT $limit";
-        return Database::getInstance()->query($sql)->fetchAll();
+        require_once __DIR__ . DIRECTORY_SEPARATOR . "statements" . DIRECTORY_SEPARATOR . "$method.php";
+        return $method(...$args);
     }
-    public static function getOne(string $table, string $where)
-    {
-        return Database::getInstance()->query("SELECT * FROM $table WHERE $where LIMIT 1")->fetch();
-    }
-    public static function update(string $table, array $data, string $where)
-    {
-        if (count($data) == 0) return null;
-        $sql = "UPDATE $table SET ";
-        foreach ($data as $key => $value) {
-            $sql .= "$key = '$value', ";
-        }
-        $sql = substr($sql, 0, -2);
-        $sql .= " WHERE $where";
-        return Database::getInstance()->exec($sql);
-    }
-    public static function insert(string $table, array $data)
-    {
-        $keys = array_keys($data);
-        $sql = "INSERT INTO $table (";
-        $sql .= implode(', ', $keys);
-        $sql .= ") VALUES (";
-        $sql .= implode(', ', array_map(function ($value) {
-            return "'$value'";
-        }, $data));
-        $sql .= ")";
-        return Database::getInstance()->exec($sql);
-    }
-    public static function delete(string $table, string $where)
-    {
-        return Database::getInstance()->exec("DELETE FROM $table WHERE $where");
-    }
-    public static function query(string $sql) {
-        return Database::getInstance()->query($sql)->fetchAll();
-    } 
-    public static function transaction(callable $callback)
-    {
-        Database::getInstance()->beginTransaction();
-        $callback(fn() => Database::getInstance()->commit(), fn() => Database::getInstance()->rollBack());
-    }
-
 }
