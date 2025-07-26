@@ -4,6 +4,8 @@ class HomeController
     public static function index(Request $request)
     {
 
+        // var_dump(Database::update('something')->set(['name' => 'ahihi' . rand(1, 100), 'age' => rand(1, 1000)])->where([['id', '=', '193'], ['name', '=', 'demo']])->where('age', '=', '15')->execute());
+        // var_dump(Database::delete('something')->where([['id', '=', '195'], ['name', '=', 'assds']])->execute());
         // var_dump(Database::insert('something')->columns('name', 'age')->withData(['asdds',17])->execute());
         // var_dump(Database::select('something')->where('id', '>=', '194')->orWhere('name', '=', 'demo')->getDistinct('name'));
         // var_dump(Database::select('something')->where([['id', '=', '193'], ['name', '=', 'demo']])->where([['age', '=', '12']])->get('name'));

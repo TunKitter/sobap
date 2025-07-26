@@ -15,5 +15,5 @@ function where($args, &$statement)
     $sql = "(" . trim(ltrim($sql, 'AND')) . ")";
     if (!isset($statement['where'])) $statement['where'] = "WHERE $sql";
     else $statement['where'] .= " OR $sql";
-    return new DatabaseHandler(['limit', 'get', 'orderBy', "groupBy", 'getDistinct', 'where'], $statement);
+    return new DatabaseHandler(['limit', 'get','execute', 'orderBy', "groupBy", 'getDistinct', 'where'], $statement);
 }
