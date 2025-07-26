@@ -14,8 +14,7 @@ class DatabaseHandler
     {
         if (array_search($method, $this->sql) !== false) {
             if (!function_exists($method)) include __DIR__ . DIRECTORY_SEPARATOR . "units" . DIRECTORY_SEPARATOR . "$method.php";
-            if(count($args) == 0) $args = [[]];
-            $return = $method(...[...$args, $this->statement]);
+            $return = $method($args, $this->statement);
             if ($return !== null) return $return;
             return new DatabaseHandler($this->sql, $this->statement);
         } else throw new Exception("Invalid statement");

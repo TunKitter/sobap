@@ -1,6 +1,6 @@
 <?php
 
-function execute($sql, &$statement)
+function execute($args, &$statement)
 {
     $data = Database::getInstance()->prepare(trim(implode(' ', $statement)));
     $data->execute();

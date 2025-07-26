@@ -1,9 +1,16 @@
 <?php
-function where($wheres, &$statement)
+function where($args, &$statement)
 {
     $sql = '';
-    foreach ($wheres as $where) {
-        $sql .= "AND {$where[0]} {$where[1]} '{$where[2]}' ";
+    switch (gettype($args[0])) {
+        case 'string':
+            $sql = "{$args[0]} {$args[1]} '{$args[2]}' ";
+            break;
+        case 'array': {
+            foreach ($args[0] as $where) $sql .= "AND {$where[0]} {$where[1]} '{$where[2]}' ";
+            $sql = trim(ltrim($sql, 'AND'));
+            break;
+        }
     }
     $sql = "(" . trim(ltrim($sql, 'AND')) . ")";
     if (!isset($statement['where'])) $statement['where'] = "WHERE $sql";

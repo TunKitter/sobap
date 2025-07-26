@@ -1,6 +1,7 @@
 <?php
-function orderBy($column, $order, &$statement)
+function orderBy($order, &$statement)
 {
-    $statement['orderBy'] = "ORDER BY $column $order";
+    $order = implode(' ', $order);
+    $statement['orderBy'] = "ORDER BY $order";
     return new DatabaseHandler(['limit','get','getDistinct'], $statement);
 }
