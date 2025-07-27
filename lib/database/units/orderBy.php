@@ -1,5 +1,5 @@
 <?php
-function orderBy($order, &$statement)
+function sobap_sql_orderBy($order, &$statement): DatabaseHandler
 {
     $order = implode(' ', $order);
     $statement['orderBy'] = "ORDER BY $order";

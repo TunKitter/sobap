@@ -1,5 +1,6 @@
 <?php
-function withData($args, &$statement) {
+function sobap_sql_withData($args, &$statement): DatabaseHandler
+{
     $data = '';
     foreach ($args as $key => $value)  $data .= "('" . implode("','", $value) . "'),";
     $data = trim($data, ',');

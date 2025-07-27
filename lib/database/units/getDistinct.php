@@ -1,5 +1,5 @@
 <?php
-function getDistinct($columns, &$statement)
+function sobap_sql_getDistinct($columns, &$statement)
 {
     if (count($columns) == 0) $columns = ['*'];
     $statement['select'] = "SELECT DISTINCT " . implode(',', $columns);

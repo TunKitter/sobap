@@ -1,5 +1,5 @@
 <?php
-function get($columns, &$statement)
+function sobap_sql_get($columns, &$statement)
 {
     if (count($columns) == 0) $columns = ['*'];
     $statement['select'] = "SELECT " . implode(',', $columns);

@@ -1,5 +1,5 @@
 <?php
-function limit($limit, &$statement)
+function sobap_sql_limit($limit, &$statement): DatabaseHandler
 {
     $limit = implode(',', $limit);
     $statement['limit'] = "LIMIT $limit";

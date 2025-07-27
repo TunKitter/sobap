@@ -1,5 +1,5 @@
 <?php
-function set($args, &$statement)
+function sobap_sql_set($args, &$statement): DatabaseHandler
 {
     $sql = '';
     foreach ($args[0] as $key => $value) $sql .= "$key = '$value',";

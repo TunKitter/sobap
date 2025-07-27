@@ -13,7 +13,8 @@ class DatabaseHandler
     public function __call($method, $args)
     {
         if (array_search($method, $this->sql) !== false) {
-            if (!function_exists($method)) include __DIR__ . DIRECTORY_SEPARATOR . "units" . DIRECTORY_SEPARATOR . "$method.php";
+            if (!function_exists("sobap_sql_$method")) include __DIR__ . DIRECTORY_SEPARATOR . "units" . DIRECTORY_SEPARATOR . "$method.php";
+            $method = "sobap_sql_$method";
             $return = $method($args, $this->statement);
             if ($return !== null) return $return;
             return new DatabaseHandler($this->sql, $this->statement);

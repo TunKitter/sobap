@@ -4,6 +4,7 @@ class HomeController
     public static function index(Request $request)
     {
 
+        // var_dump(Database::select('something')->join('ahihi','ahihi.something_id', '=', 'something.id')->get());
         // Database::transaction(function ($db, $commit, $rollback) {
         //     $a = false;
         //     $db::insert('something')->columns('name', 'age')->withData(['ahihi' . rand(1, 100), rand(1, 1000)])->execute();

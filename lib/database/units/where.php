@@ -1,5 +1,5 @@
 <?php
-function where($args, &$statement)
+function sobap_sql_where($args, &$statement): DatabaseHandler
 {
     $sql = '';
     switch (gettype($args[0])) {
