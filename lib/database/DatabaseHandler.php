@@ -3,8 +3,6 @@ class DatabaseHandler
 {
     public function __construct(private array $sql, private array $statement)
     {
-        $this->sql = $sql;
-        $this->statement = $statement;
     }
     public function getStatement()
     {
@@ -12,7 +10,7 @@ class DatabaseHandler
     }
     public function __call($method, $args)
     {
-        if (array_search($method, $this->sql) !== false) {
+        if (in_array($method, $this->sql)) {
             if (!function_exists("sobap_sql_$method")) include __DIR__ . DIRECTORY_SEPARATOR . "units" . DIRECTORY_SEPARATOR . "$method.php";
             $method = "sobap_sql_$method";
             $return = $method($args, $this->statement);

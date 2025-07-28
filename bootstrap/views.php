@@ -18,13 +18,12 @@ class View
     public static function getView($view, $handler = null)
     {
         $html = '';
-        if (gettype($view) == 'string') $html = static::getSingleView($view);
+        if (is_string($view)) $html = static::getSingleView($view);
         else foreach ($view as $v) $html .= static::getSingleView($v);
         $document = new DomDocument();
         @$document->loadHTML($html);
         if ($handler == null) return new DOMDecorator($document);
-        elseif (gettype($handler) == 'string') return static::getSingleHandler($handler, $document);
-        $hs = new stdClass;
+        elseif (is_string($handler)) return static::getSingleHandler($handler, $document);        $hs = new stdClass;
         foreach ($handler as $h) 
          {
             $data = explode('/', $h);

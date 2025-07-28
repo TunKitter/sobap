@@ -30,7 +30,7 @@ function handleExceptionWithDebug(Throwable $debugs)
     switch ($mode) {
         case "DEV":
             $html = new DOMDocument;
-            $html->loadHTMLFile(getenv('ROOT_DIR') . "\\lib\\utility\\trace.html");
+            @$html->loadHTMLFile(getenv('ROOT_DIR') . "\\lib\\utility\\trace.html");
             $xpath = new DOMXPath($html);
             $wrapper = $xpath->query("//div[contains(@class,'traces')]");
             $traceDiv = $html->createElement("div");
@@ -47,5 +47,7 @@ function handleExceptionWithDebug(Throwable $debugs)
             exit($html->saveHTML());
         case "PROD":
             return null;
+        default:
+            throw new Exception("Invalid environment mode");
     }
 }

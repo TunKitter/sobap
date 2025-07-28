@@ -11,6 +11,7 @@ class DatabaseTest extends TestCase
 {
     public static function setUpBeforeClass(): void
     {
+        putenv('MODE=DEV');
         putenv('MYSQL_HOST=localhost');
         putenv('MYSQL_USERNAME=root');
         putenv('MYSQL_DATABASE=demo');
@@ -19,13 +20,12 @@ class DatabaseTest extends TestCase
     }
     public static function tearDownAfterClass(): void
     {
-        putenv('MYSQL_HOST=');
-        putenv('MYSQL_USERNAME=');
-        putenv('MYSQL_DATABASE=');
-        putenv('MYSQL_PASSWORD=');
-        putenv('MYSQL_PORT=');
+        putenv('MYSQL_HOST');
+        putenv('MYSQL_USERNAME');
+        putenv('MYSQL_DATABASE');
+        putenv('MYSQL_PASSWORD');
+        putenv('MYSQL_PORT');
     }
-
     public function testTheSameInstance()
     {
         $this->assertSame(Database::getInstance(), Database::getInstance());

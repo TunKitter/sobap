@@ -1,7 +1,7 @@
 <?php
 function sobap_sql_get($columns, &$statement)
 {
-    if (count($columns) == 0) $columns = ['*'];
+   if (empty($columns)) $columns = ['*'];
     $statement['select'] = "SELECT " . implode(',', $columns);
     $sql = '';
     foreach ($statement as $key => $value) $sql .= "$value ";
