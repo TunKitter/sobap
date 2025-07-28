@@ -3,7 +3,7 @@ class HomeController
 {
     public static function index(Request $request)
     {
-
+        // var_dump(Validate::with('Demo')->from('sadas')->justDemo());
         // var_dump(Database::select('something')->join('ahihi','ahihi.something_id', '=', 'something.id')->get());
         // Database::transaction(function ($db, $commit, $rollback) {
         //     $a = false;
