@@ -6,7 +6,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 require_once "lib/Request.php";
 class RequestTest extends TestCase
 {
-    #[TestDox("Test the same value between Request object and GET global variable")]
     public static function fakeData()
     {
         return [
@@ -15,6 +14,7 @@ class RequestTest extends TestCase
             'Test with c' => ['c', 'c value'],
         ];
     }
+    #[TestDox("Test the same value between Request object and GET global variable")]
     #[DataProvider('fakeData')]
     public function testSameValueGetRequest($key, $value)
     {
@@ -29,7 +29,7 @@ class RequestTest extends TestCase
         $request = new Request();
         $this->assertSame($request->post($key), $value);
     }
-    #[TestDox("Test the default value Request object")]
+    #[TestDox("Test default value Request object")]
     public function testDefaultValueGetRequest()
     {
         $request = new Request();
