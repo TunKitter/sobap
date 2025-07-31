@@ -3,6 +3,11 @@ class HomeController
 {
     public static function index(Request $request)
     {
+        // setcookie('ahihi', 'sdasds1232ahihi', time() + 3600, '/');
+        // var_dump(json_encode(base64_encode(json_encode(['ahihi' => 'ahihi','something' => '@@123femsdas']))));
+        // var_dump(Auth::use('jwt')->login($request));
+        // var_dump(Auth::use('jwt')->check($request));
+        // var_dump(Auth::use('jwt')->logout($request));
         // var_dump(Validate::with('Demo')->from('sadas')->justDemo());
         // var_dump(Database::select('something')->join('ahihi','ahihi.something_id', '=', 'something.id')->get());
         // Database::transaction(function ($db, $commit, $rollback) {

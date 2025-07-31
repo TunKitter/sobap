@@ -17,4 +17,8 @@ class Request
     {
         return $_POST[$name] ?? $default;
     }
+    public function cookie($name, $default = null)
+    {
+        return $_COOKIE[$name] ?? $default;
+    }
 }
