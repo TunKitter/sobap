@@ -1,5 +1,5 @@
 <?php
-class Auth
+class AuthHandler
 {
     public static function login(Request $request)
     {

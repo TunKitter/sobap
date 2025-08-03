@@ -11,11 +11,13 @@ function auth_jwt()
             $data = explode('.', $token);
             if (count($data) !== 3) return $return;
             [$header, $payload, $signature] = $data;
+            $expected_header = base64url_encode(json_encode(['typ' => 'JWT', 'alg' => 'HS256']));
+            if(!hash_equals($header,$expected_header)) return $return;
             $expected_signature = base64url_encode(hash_hmac('sha256', "$header.$payload", getenv('JWT_SECRET')));
             if (!hash_equals($signature, $expected_signature)) return $return;
             $time = json_decode(base64url_decode($payload), true);
-            if(!isset($time[0]['exp']) && is_numeric($time[0]['exp'])) return $return;
-            $time = $time[0]['exp']; 
+            if(!isset($time['exp']) || !is_numeric($time['exp'])) return $return;
+            $time = $time['exp']; 
             if (time() > $time) return $return;
             if(file_exists($path = getenv('ROOT_DIR'). "/lib/auth/methods/jwt_blacklist/$signature")) {
                 $file = fopen($path, 'r');
@@ -27,14 +29,14 @@ function auth_jwt()
                 return $return;
             }
             $return['status'] = true;
-            $return['data'] = json_decode(base64url_decode($payload), true)[0];
+            $return['data'] = json_decode(base64url_decode($payload), true);
             return $return;
         }
 
         public function generate(array $payload): string
         {
             $header = base64url_encode(json_encode(['typ' => 'JWT', 'alg' => 'HS256']));
-            $payload[0]['exp'] = time() + Auth['expires'] * 3600;
+            $payload['exp'] = time() + Auth['expires'] * 3600;
             $payload = base64url_encode(json_encode($payload));
             $signature = base64url_encode(hash_hmac('sha256', "$header.$payload", getenv('JWT_SECRET')));
             return "$header.$payload.$signature";

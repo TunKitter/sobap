@@ -6,6 +6,17 @@ class HomeController
         // setcookie('ahihi', 'sdasds1232ahihi', time() + 3600, '/');
         // var_dump(json_encode(base64_encode(json_encode(['ahihi' => 'ahihi','something' => '@@123femsdas']))));
         // var_dump(Auth::use('jwt')->login($request));
+        // var_dump($_COOKIE['sdas']);
+        // require_once getenv("ROOT_DIR"). "/configs/auth.php";
+        // $payload = [];
+        // $payload['name'] = 'tunk';
+        // $payload['age'] = 12;
+        // $header = base64url_encode(json_encode(['typ' => 'JWT', 'alg' => 'HS256']));
+        // $payload['exp'] = time() + Auth['expires'] * 3600;
+        // $payload = base64url_encode(json_encode($payload));
+        // $signature = base64url_encode(hash_hmac('sha256', "$header.$payload", getenv('JWT_SECRET')));
+        // var_dump("$header.$payload.$signature");
+        // $_COOKIE['Auth'] = "$header.$payload.$signature";
         // var_dump(Auth::use('jwt')->check($request));
         // var_dump(Auth::use('jwt')->logout($request));
         // var_dump(Validate::with('Demo')->from('sadas')->justDemo());
