@@ -6,8 +6,9 @@ require "lib/utility/utility.php";
 require "env.php";
 require "views.php";
 require "lib/validate/Validate.php";
-require "lib/Database/DatabaseHandler.php";
-require "lib/Database/Database.php";
+require "lib/database/DatabaseHandler.php";
+require "lib/database/Database.php";
+require "lib/auth/Auth.php";
 
 $implementation = scandir("lib/route/implementation");
 for($i = 2; $i < count($implementation); $i++) {
