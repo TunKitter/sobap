@@ -3,6 +3,9 @@ class HomeController
 {
     public static function index(Request $request)
     {
+        // var_dump(Database::update('something')->set(['name' => 'ah"iii','age'=>11])->where('id', '=', '274')->execute(function ($th) {
+            // var_dump($th);
+        // }));
         // var_dump(Database::select('something')->groupBy('id')->get(['name,COUNT(age)'],function($th)
         // {
             // var_dump($th);
