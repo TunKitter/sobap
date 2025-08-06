@@ -9,7 +9,7 @@ function sobap_sql_execute($args, &$statement)
     $data->execute($prepare);
     return $data->fetchAll();
     } catch (\Throwable $th) {
-        $args[0]($th);
+        if(isset($args[0])) $args[0]($th);
         return false;
     }
 }

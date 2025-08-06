@@ -3,6 +3,10 @@ class HomeController
 {
     public static function index(Request $request)
     {
+        // var_dump(Database::select('something')->groupBy('id')->get(['name,COUNT(age)'],function($th)
+        // {
+            // var_dump($th);
+        // }));
         // var_dump(Database::raw('SELECT * FROM something WHERE id = ? AND name = ?')->usingData('275','tunk')->execute(function($th){
             // echo "something went wrong";
         // }));
