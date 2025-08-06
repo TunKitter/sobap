@@ -50,7 +50,7 @@ function auth_jwt()
                 if ($data === null || Validate::from($data)->alphaNumeric()->validate()['is_error'] ) return false;
                 $payload[] = [$value,'=',$data];
             }
-            $data = Database::select(Auth['data'][0])->where($payload)->limit(1)->get(...Auth['data'][1]);
+            $data = Database::select(Auth['data'][0])->where($payload)->limit(1)->get(Auth['data'][1]);
             if(count($data) === 0) return false;
             setcookie('Auth', $this->generate($data), time() + Auth['expires'] * 3600);
             return true;

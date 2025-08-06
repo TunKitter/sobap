@@ -3,6 +3,9 @@ class HomeController
 {
     public static function index(Request $request)
     {
+        // var_dump(Database::raw('SELECT * FROM something')->usingData()->execute(function($th){
+            // echo "something went wrong";
+        // }));
         // var_dump(Database::update('something')->set(['name' => 'ah"iii','age'=>11])->where('id', '=', '274')->execute(function ($th) {
             // var_dump($th);
         // }));

@@ -29,8 +29,8 @@ class DatabaseTest extends TestCase
         $this->assertEquals(Database::insert('something')->columns('name', 'age')->withData(['testing', 123])->execute(), []);
         $this->assertEquals(Database::update('something')->set(['name' => 'testing', 'age' => 123])->where([['id', '=', '1'], ['name', '=', 'demo']])->execute(), []);
         $this->assertEquals(Database::delete('something')->where([['id', '=', '1'], ['name', '=', 'demo']])->execute(), []);
-        $this->assertIsArray(Database::raw('SELECT * FROM something')->execute());
-        $this->assertEquals(Database::raw('DELETE FROM something WHERE 0 = 1')->execute(), []);
+        $this->assertIsArray(Database::raw('SELECT * FROM something')->usingData()->execute());
+        $this->assertEquals(Database::raw('DELETE FROM something WHERE 0 = ?')->usingData(1)->execute(), []);
         $this->assertNull(Database::transaction(function ($db, $commit, $rollback) {}));
     }
     public function nonMethodDataProvider()
