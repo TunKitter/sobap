@@ -3,6 +3,9 @@ class HomeController
 {
     public static function index(Request $request)
     {
+        // Database::insert('something')->columns('name', 'age')->withData(['something',10],['demo','9'])->execute(function ($th) {
+            // var_dump($th);  
+        // });
         // var_dump(Database::select('something')->where([['age','>=',12],['name','=','tunk'],['name','!=','something']])->where('age','=',12)->orderBy('name')->get());
         // Database::delete('something')->where('id','=','391')->limit(1)->execute(function($th){
             // echo "something went wrong";
