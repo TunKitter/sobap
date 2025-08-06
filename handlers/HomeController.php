@@ -3,6 +3,14 @@ class HomeController
 {
     public static function index(Request $request)
     {
+        // var_dump(Database::select('something')->where([['age','>=',12],['name','=','tunk'],['name','!=','something']])->where('age','=',12)->orderBy('name')->get());
+        // Database::delete('something')->where('id','=','391')->limit(1)->execute(function($th){
+            // echo "something went wrong";
+        // });
+        // var_dump(Database::delete('something')->where([['age','=',"123'"],['id','=','387']])->limit(1)->execute(function($th){
+            // echo "something went wrong";
+        // }));
+
         // setcookie('ahihi', 'sdasds1232ahihi', time() + 3600, '/');
         // var_dump(json_encode(base64_encode(json_encode(['ahihi' => 'ahihi','something' => '@@123femsdas']))));
         // var_dump(Auth::use('jwt')->login($request));
