@@ -67,8 +67,12 @@ class HomeController
         // $a == 1 ? $commit() : $rollback();
         // });
         // var_dump($a);
+        // setHeader('Content-Security-Policy', "default-src 'none'");
+        // setHeader('Content-Security-Policy', "style-src 'unsafe-inline'");
+        // setCSP('default','none');
+        // var_dump(setCSP(['style'=>'unsafe-inline','script'=>'none']));
         $view = View::getView('views/home', ['methods/layout', 'methods/home']);
-        $view->home->setName("Edited Home");
+        $view->home->setName(enco_html("<script>mame?@@.á</script>",true));    
         $view->layout->render();
     }
 }

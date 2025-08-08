@@ -29,3 +29,30 @@ function base64url_decode($data)
 {
     return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
 }
+
+
+function setHeader($type,$value)
+{
+    header("$type: $value");
+}
+function setCSP($args) {
+    if(headers_sent()) return false;
+    $check = [
+        'default' =>['self','none'],
+        'script' =>['self','unsafe-inline','unsafe-eval','none'],
+        'style' =>['self','unsafe-inline','none'],
+        'img' =>['self']
+    ];
+    $header = '';
+    foreach ($args as $key => $value) {
+        if(!isset($check[$key]) || !in_array($value,$check[$key])) return false;
+        $header .= "$key-src '$value';";
+    }
+    setHeader('Content-Security-Policy',$header);
+    return true;
+}
+function enco_html($text,$full = false)
+{
+    if($full) return htmlentities($text, ENT_QUOTES, 'UTF-8');
+    return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+}
