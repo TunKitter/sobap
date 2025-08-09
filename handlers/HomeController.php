@@ -3,6 +3,33 @@ class HomeController
 {
     public static function index(Request $request)
     {
+        // var_dump(csrf()->render());
+        // var_dump(csrf()->destroy('70532ec762ca140cec1957ae6b9942311e07cd7104cf54936b1bfbb4a901c2fe'));
+        // var_dump(csrf()->check("55b6dfa39e088422083e717feb21d20efe2a8e5e4a82afd0e294d5f79472d688"));
+        // var_dump(Database::raw('SELECT * FROM something')->usingData()->execute(function($th){
+            // echo "something went wrong";
+        // }));
+        // var_dump(Database::update('something')->set(['name' => 'ah"iii','age'=>11])->where('id', '=', '274')->execute(function ($th) {
+            // var_dump($th);
+        // }));
+        // var_dump(Database::select('something')->groupBy('id')->get(['name,COUNT(age)'],function($th)
+        // {
+            // var_dump($th);
+        // }));
+        // var_dump(Database::raw('SELECT * FROM something WHERE id = ? AND name = ?')->usingData('275','tunk')->execute(function($th){
+            // echo "something went wrong";
+        // }));
+        // Database::insert('something')->columns('name', 'age')->withData(['something',10],['demo','9'])->execute(function ($th) {
+            // var_dump($th);  
+        // });
+        // var_dump(Database::select('something')->where([['age','>=',12],['name','=','tunk'],['name','!=','something']])->where('age','=',12)->orderBy('name')->get());
+        // Database::delete('something')->where('id','=','391')->limit(1)->execute(function($th){
+            // echo "something went wrong";
+        // });
+        // var_dump(Database::delete('something')->where([['age','=',"123'"],['id','=','387']])->limit(1)->execute(function($th){
+            // echo "something went wrong";
+        // }));
+
         // setcookie('ahihi', 'sdasds1232ahihi', time() + 3600, '/');
         // var_dump(json_encode(base64_encode(json_encode(['ahihi' => 'ahihi','something' => '@@123femsdas']))));
         // var_dump(Auth::use('jwt')->login($request));
@@ -43,8 +70,12 @@ class HomeController
         // $a == 1 ? $commit() : $rollback();
         // });
         // var_dump($a);
+        // setHeader('Content-Security-Policy', "default-src 'none'");
+        // setHeader('Content-Security-Policy', "style-src 'unsafe-inline'");
+        // setCSP('default','none');
+        // var_dump(setCSP(['style'=>'unsafe-inline','script'=>'none']));
         $view = View::getView('views/home', ['methods/layout', 'methods/home']);
-        $view->home->setName("Edited Home");
+        $view->home->setName(enco_html("<script>mame?@@.á</script>",true));    
         $view->layout->render();
     }
 }

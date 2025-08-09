@@ -1,5 +1,5 @@
 <?php
 function raw($query): DatabaseHandler
 {
-    return new DatabaseHandler(['execute'], ['raw' => $query]);
+    return new DatabaseHandler(['usingData'], ['raw' => $query]);
 }
