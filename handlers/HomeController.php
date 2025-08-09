@@ -3,6 +3,9 @@ class HomeController
 {
     public static function index(Request $request)
     {
+        // var_dump(csrf()->render());
+        // var_dump(csrf()->destroy('70532ec762ca140cec1957ae6b9942311e07cd7104cf54936b1bfbb4a901c2fe'));
+        // var_dump(csrf()->check("55b6dfa39e088422083e717feb21d20efe2a8e5e4a82afd0e294d5f79472d688"));
         // var_dump(Database::raw('SELECT * FROM something')->usingData()->execute(function($th){
             // echo "something went wrong";
         // }));
