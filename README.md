@@ -72,8 +72,6 @@ Sobap is a lightweight yet powerful PHP framework designed for modern web applic
 
 ```bash
 git clone https://github.com/TunKitter/sobap.git
-
-cd sobap
 ```
 
 ---
@@ -85,17 +83,19 @@ cd sobap
 ```php
 // Register routing with function
 Route::get('/submit', function($request) {
-    // handle data...
+    // write your code here...
 });
 
 // Register routing with controller
 Route::post('/home', 'HomeController::index');
+
+// Register routing with sub-folder controller 
+Route::post('/home', 'Blog/Detail/DetailController::index');
 ```
 
 ### 2. Controller Example
 
 ```php
-// handlers/HomeController.php
 class HomeController {
     public function index(Request $request) {
         $view = View::getView('views/home', ['methods/layout', 'methods/home']);
@@ -108,9 +108,14 @@ class HomeController {
 ### 3. Request Access
 
 ```php
-$request->get('name');
-$request->post('value');
-$request->cookie('Auth');
+class HomeController {
+    public function index(Request $request) {
+        $request->get('name');
+        $request->get('name','default value');
+        $request->post('value');
+        $request->cookie('Auth');
+    }
+}
 ```
 
 ### 4. Authentication (JWT)
@@ -129,8 +134,11 @@ Auth::use('jwt')->logout($request);
 ### 5. Validation
 
 ```php
+// Example validate
+Validate::from('something text')->alphaNumericSpace()->regex('/{\w+}+/','please try again')->validate();
+
 // Custom validator
-Validate::with('Demo')->from('demo')->justDemo()->validate();
+Validate::with('myOwnValidate')->from('demo1')->justDemo()->validate();
 ```
 
 ### 6. Database Operations
@@ -160,12 +168,6 @@ $dom->loadHTML('<h1>Hello, World!</h1>');
 $view = new DOMDecorator($dom);
 $view->render();
 ```
-
-### 8. Exception Handling
-
-Errors and exceptions are caught and rendered as HTML traces in development mode for easy debugging.
-
----
 
 ## Contributing
 
