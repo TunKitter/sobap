@@ -135,7 +135,7 @@ Auth::use('jwt')->logout($request);
 
 ```php
 // Example validate
-Validate::from('something text')->alphaNumericSpace()->regex('/{\w+}+/','please try again')->validate();
+Validate::from('something text')->alphaNumericSpace()->regex('/^[a-zA-Z0-9]+$/','please try again')->validate();
 
 // Custom validator
 Validate::with('myOwnValidate')->from('demo1')->justDemo()->validate();
@@ -163,10 +163,9 @@ Database::transaction(function ($db, $commit, $rollback) {
 ### 7. View Rendering
 
 ```php
-$dom = new DOMDocument();
-$dom->loadHTML('<h1>Hello, World!</h1>');
-$view = new DOMDecorator($dom);
-$view->render();
+$view = View::getView('views/home', ['methods/layout', 'methods/home']);
+$view->home->setName("I changed");    
+$view->layout->render();
 ```
 
 ## Contributing
