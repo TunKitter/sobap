@@ -1,10 +1,11 @@
 <?php
-class get implements RouteHandler
+class put implements RouteHandler
 {
     public static function handle($args)
     {
+
         Route::getInstance()->addEndpoint($args[0], function () {
-            return $_SERVER['REQUEST_METHOD'] == 'GET';
+            return $_SERVER['REQUEST_METHOD'] == 'PUT';
         }, function (Request $data) use ($args) {
             handle_http_method($args, $data);
         });

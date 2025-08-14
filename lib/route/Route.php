@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "Request.php";
+require getenv("ROOT_DIR") .  "/lib/route/implementation/common/http_method.php";
+require getenv("ROOT_DIR") . "/lib/route/abstraction/RouteHandler.php";
 class Route
 {
     private static $instance;

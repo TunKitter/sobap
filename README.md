@@ -1,15 +1,15 @@
 ![alt text](https://media-public.canva.com/CrTLQ/MAE_7sCrTLQ/1/t.png "Title")
 # Sobap
 
-Sobap is a lightweight yet powerful PHP framework designed for modern web application development. With a focus on simplicity, modularity, and extensibility, Sobap delivers essential tools for building robust and maintainable applications—without unnecessary overhead. Whether you're creating APIs or dynamic websites, Sobap empowers you to move fast with clear structure and efficient code.
+Sobap is a lightweight powerful PHP framework designed for modern web application development. With a focus on simplicity, modularity, and extensibility, Sobap delivers essential tools for building robust and maintainable applications without unnecessary overhead. Whether you're creating APIs or dynamic websites, Sobap empowers you to move fast with clear structure and efficient code.
 
 ---
 > **Note:** Sobap is built using only PHP core. No Composer, package managers, or autoloading are used. All dependencies are managed and loaded manually within the source code.
 
 ## Features
 - **Routing System**
-  - Register routes for GET and POST requests using expressive syntax.
-  - Supports custom controller handlers and closures.
+  - Register routes for `GET`, `POST`, `PUT`, `PATCH` and `DELETE` requests using expressive syntax.
+  - Supports handling with controllers.
 
 - **Request Handling**
   - Unified `Request` object for accessing GET, POST, COOKIE data and custom parameters.
@@ -26,18 +26,17 @@ Sobap is a lightweight yet powerful PHP framework designed for modern web applic
 - **Database Operations**
   - Fluent API for SELECT, INSERT, UPDATE, DELETE queries.
   - Support for transactions, joins, distinct queries, and raw SQL execution.
-  - Easily extensible: you can add new database functionalities by simply creating new files for custom logic and chaining them with existing database modules.
-  - This flexible architecture allows developers to integrate specific features and extend database operations without modifying the core.
+  - Easily extend with custom database functionalities by adding new logic files and chaining with existing modules.
 - **Response Object**  
   - Return JSON data
   - Perform redirects
   - You can add new your own functionalities
 - **View Rendering**
-    - Using native DOM PHP extension for view rendering.
-    - Views and handlers are split and communicate via the DOM
+    - Using native DOM PHP extension for view rendering (SPA)
+    - Views and handlers are separate and communicate via the DOM
 - **Utility**
   - Provides utility functions and libraries.
-  - Developers can easily write their own utility functions and use them anywhere in the project for maximum flexibility.
+  - Easily write their own utility functions and use them anywhere in the project for maximum flexibility.
 - **Exception and Error Handling**
   - Centralized error and exception handling with debug mode and HTML trace output.
 
@@ -153,6 +152,10 @@ Database::select('something')->where('id', '>', 10)->get();
 // Update
 Database::update('something')->set(['name' => 'Bob'])->where('id', '=', 1)->execute();
 
+// Delete
+Database::delete('something')->where('id', '=', 1)->execute();
+
+
 // Transaction
 Database::transaction(function ($db, $commit, $rollback) {
     $db::insert('something')->columns('name', 'age')->withData(['Test', 18])->execute();
@@ -163,9 +166,9 @@ Database::transaction(function ($db, $commit, $rollback) {
 ### 7. View Rendering
 
 ```php
-$view = View::getView('views/home', ['methods/layout', 'methods/home']);
-$view->home->setName("I changed");    
-$view->layout->render();
+$view = View::getView('views/home', ['methods/layout', 'methods/home']); // one view with 2 handlers
+$view->home->setName("I changed"); // using "home" handler
+$view->layout->render(); // using "layout" handler
 ```
 
 ## Contributing
