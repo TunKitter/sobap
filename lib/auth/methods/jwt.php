@@ -46,7 +46,7 @@ function auth_jwt()
         {
             $payload = [];
             foreach(Auth['data'][2] as $value) {
-                $data = $request->get($value, null);
+                $data = $request->post($value, null);
                 if ($data === null || Validate::from($data)->alphaNumeric()->validate()['is_error'] ) return false;
                 $payload[] = [$value,'=',$data];
             }

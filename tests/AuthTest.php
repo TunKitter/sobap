@@ -53,8 +53,8 @@ class AuthTest extends TestCase
         $this->assertTrue(Auth::use('jwt')->check($request)['status']);
     }
     public function testValidAuthLogin() {
-        $_GET['name'] = 'tunk';
-        $_GET['age'] = 12;
+        $_POST['name'] = 'tunk';
+        $_POST['age'] = 12;
         $this->assertTrue(Auth::use('jwt')->login(new Request()));
     }
     public function unvalidAuthLoginData() {
@@ -68,13 +68,13 @@ class AuthTest extends TestCase
     }
     #[DataProvider('unvalidAuthLoginData')]
      public function testUnvalidAuthLogin($name,$age) {
-        $_GET['name'] = $name;
-        $_GET['age'] = $age;
+        $_POST['name'] = $name;
+        $_POST['age'] = $age;
         $this->assertNotTrue(Auth::use('jwt')->login(new Request()));
     }
     public function testLogoutAndBlackListtAuthData() {
-        $_GET['name'] = 'tunk';
-        $_GET['age'] = 12;
+        $_POST['name'] = 'tunk';
+        $_POST['age'] = 12;
         $request = new Request();
         $this->assertTrue(Auth::use('jwt')->login($request));
         $data = Auth::use('jwt')->check($request);
